@@ -1,16 +1,16 @@
 package kata;
 
-import java.util.List;
+import java.util.Optional;
 
 interface Validator {
 
-    String validate(String password);
+    Optional<String> validate(String password);
 
     public final class LetterValidator implements Validator {
 
         @Override
-        public String validate(String password) {
-            return containsLetter(password) ? "" : "Password must contain a letter";
+        public Optional<String> validate(String password) {
+            return containsLetter(password) ? Optional.empty() : Optional.of("Password must contain a letter");
         }
 
 
@@ -24,8 +24,8 @@ interface Validator {
     public class DigitValidator implements Validator {
 
         @Override
-        public String validate(String password) {
-            return password.matches(".*\\d.*") ? "" : "Password needs to contain atleast one digit";
+        public Optional<String> validate(String password) {
+            return password.matches(".*\\d.*") ? Optional.empty() : Optional.of("Password needs to contain atleast one digit");
         }
 
     }
@@ -33,8 +33,8 @@ interface Validator {
     public class SpecialCharValidator implements Validator {
 
         @Override
-        public String validate(String password) {
-            return containsSpecialCharacter(password) ? "" : "Password needs to contain atleast one special character";
+        public Optional<String> validate(String password) {
+            return containsSpecialCharacter(password) ? Optional.empty() : Optional.of("Password needs to contain atleast one special character");
         }
 
         private boolean containsSpecialCharacter(String password) {
@@ -53,8 +53,8 @@ interface Validator {
         }
 
         @Override
-        public String validate(String password) {
-            return password.length() >= length ? "" : "Password needs to be " + length + " chars long";
+        public Optional<String> validate(String password) {
+            return password.length() >= length ? Optional.empty() : Optional.of("Password needs to be " + length + " chars long");
         }
     }
 }

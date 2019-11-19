@@ -1,6 +1,5 @@
 package kata;
 
-import static org.fest.assertions.api.Assertions.assertThat;
 import static org.junit.Assert.*;
 
 import java.util.ArrayList;
@@ -9,7 +8,7 @@ import kata.Validator.LengthValidator;
 import kata.Validator.LetterValidator;
 import kata.Validator.SpecialCharValidator;
 
-import org.fest.assertions.api.Assertions;
+import static org.assertj.core.api.Assertions.assertThat;
 import org.junit.Test;
 
 public class ValidatorTest  {

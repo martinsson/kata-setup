@@ -4,6 +4,8 @@ import static java.util.Arrays.asList;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
 
 import kata.Validator.DigitValidator;
 import kata.Validator.LengthValidator;
@@ -31,21 +33,12 @@ public class Password {
     }
 
     private List<String> validate(String password, List<Validator> validators) {
-        List<String> errors = listThatRetainsOnlyActualErrors();
+
+        List<String> errors = new ArrayList<>();
         for (Validator v : validators) {
-            errors.add(v.validate(password));
+            Optional<String> possibleError = v.validate(password);
+            possibleError.ifPresent(errors::add);
         }
         return errors;
     }
-
-
-    private ArrayList<String> listThatRetainsOnlyActualErrors() {
-        return new ArrayList<String>() {
-            @Override
-            public boolean add(String s) {
-                return s.isEmpty() ? false : super.add(s);
-            }
-        };
-    }
-
 }
