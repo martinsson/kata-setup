@@ -34,11 +34,8 @@ public class Password {
 
     private List<String> validate(String password, List<Validator> validators) {
 
-        List<String> errors = new ArrayList<>();
-        for (Validator v : validators) {
-            Optional<String> possibleError = v.validate(password);
-            possibleError.ifPresent(errors::add);
-        }
-        return errors;
+        return validators.stream()
+                .flatMap(v -> v.validate(password).stream())
+                .collect(Collectors.toList());
     }
 }
