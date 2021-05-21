@@ -1,0 +1,29 @@
+@startuml
+skinparam classBackgroundColor #LimeGreen-PaleGreen
+skinparam classBorderColor #Green
+skinparam backgroundColor transparent
+skinparam arrowColor DarkGreen
+
+interface Validator  {
+    validate(string)
+}
+
+Validator <|-- LengthValidator
+Validator <|-- LetterValidator
+Validator <|-- DigitValidator
+Validator <|-- SpecialCharValidator
+
+class Password {
+    validators[]
+    adminValidators[]
+    checkPassword(string)
+    checkAdminPassowrd(string)
+}
+
+class LengthValidator {
+    minLength: int
+}
+
+Password *- Validator : has many
+
+@enduml
