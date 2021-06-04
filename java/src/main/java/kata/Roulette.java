@@ -7,16 +7,16 @@ package kata;
  */
 public class Roulette {
 
-  private final Ball ball;
+  private final BallSpinAdapter ball;
   private final Between0And37Randomizer randomizer;
 
-  public Roulette(Ball ball, Between0And37Randomizer randomizer) {
+  public Roulette(BallSpinAdapter ball, Between0And37Randomizer randomizer) {
     this.ball = ball;
     this.randomizer = randomizer;
   }
 
   public Result playGame() {
-    ball.roll();
+    ball.spin();
     int randomResult = randomizer.getRouletteResult();
     return new Result(randomResult);
   }

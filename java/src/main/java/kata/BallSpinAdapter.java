@@ -1,19 +1,20 @@
 package kata;
 
-public class Ball {
+public class BallSpinAdapter implements BallSpinner {
 
   private static final int DEFAULT_TIME = 20000;
   private final int timeInMilliseconds;
 
-  public Ball(int timeInMilliseconds) {
+  public BallSpinAdapter(int timeInMilliseconds) {
     this.timeInMilliseconds = timeInMilliseconds;
   }
 
-  public Ball() {
+  public BallSpinAdapter() {
     this(DEFAULT_TIME);
   }
 
-  public void roll() {
+  @Override
+  public void spin() {
     try {
       Thread.sleep(timeInMilliseconds);
     } catch (InterruptedException e) {

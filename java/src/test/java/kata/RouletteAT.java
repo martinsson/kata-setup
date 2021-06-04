@@ -10,7 +10,7 @@ import org.junit.jupiter.api.Test;
 
 public class RouletteAT {
   private Between0And37Randomizer randomizer = mock(Between0And37Randomizer.class);
-  private Ball ball = mock(Ball.class);
+  private BallSpinAdapter ball = mock(BallSpinAdapter.class);
 
   @Test
   public void itWaitsForTheBallToStop() {
@@ -18,7 +18,7 @@ public class RouletteAT {
 
     roulette.playGame();
 
-    verify(ball).roll();
+    verify(ball).spin();
   }
 
   @Test()

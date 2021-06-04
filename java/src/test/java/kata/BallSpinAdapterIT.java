@@ -11,14 +11,14 @@ import static org.assertj.core.api.Assertions.within;
  * the suffix IT means that it's run in a separate test suite.
  * Another possibility is to put this into a separate directory like src/integration-test/java
  */
-public class BallIT {
+public class BallSpinAdapterIT {
 
   @Test
   public void itRollsForAGivenAmountOfTime() throws Exception {
-    Ball ball = new Ball();
+    BallSpinAdapter ball = new BallSpinAdapter();
 
     double before = System.currentTimeMillis();
-    ball.roll();
+    ball.spin();
     double after = System.currentTimeMillis();
 
     int twentySeconds = 20000;

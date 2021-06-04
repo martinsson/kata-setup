@@ -6,9 +6,9 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 import java.util.stream.IntStream;
 
-public class JavaRandomizerIT {
+public class JavaRandomizerAdapterIT {
 
-	private JavaRandomizer javaRandomizer = new JavaRandomizer();
+	private JavaRandomizerAdapter javaRandomizer = new JavaRandomizerAdapter();
 
 	@Test
 	public void numbersAreNeverOutsideBoundsOf0And37() throws Exception {
