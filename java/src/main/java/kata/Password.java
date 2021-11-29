@@ -13,12 +13,12 @@ import kata.Validator.LetterValidator;
 import kata.Validator.SpecialCharValidator;
 
 public class Password {
-    private List<Validator> userValidators = asList(
+    private final List<Validator> userValidators = asList(
             new LengthValidator(7),
             new DigitValidator(),
             new LetterValidator());
 
-    private List<Validator> adminValidators = asList(
+    private final List<Validator> adminValidators = asList(
             new LengthValidator(10),
             new DigitValidator(),
             new LetterValidator(),

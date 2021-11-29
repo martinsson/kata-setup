@@ -25,15 +25,19 @@ public class ValidatorTest  {
   @Test public void
   letterValidatorAddsErrorWhenThereIsNoletter() throws Exception {
     Validator letterValidator = new Validator.LetterValidator();
-    assertThat(letterValidator.validate("")).contains("Password must contain a letter");
-    assertThat(letterValidator.validate("6")).contains("Password must contain a letter");
+    String letterError = "Password must contain a letter";
+    assertThat(letterValidator.validate("")).contains(letterError);
+    assertThat(letterValidator.validate("6")).contains(letterError);
+    assertThat(letterValidator.validate("!")).contains(letterError);
   }
 
   @Test public void
   digitValidatorAddsErrorWhenThereIsNoDigit() throws Exception {
     Validator digitValidator = new Validator.DigitValidator();
-    assertThat(digitValidator.validate("")).contains("Password needs to contain atleast one digit");
-    assertThat(digitValidator.validate("a")).contains("Password needs to contain atleast one digit");
+    String digitError = "Password needs to contain atleast one digit";
+    assertThat(digitValidator.validate("")).contains(digitError);
+    assertThat(digitValidator.validate("a")).contains(digitError);
+    assertThat(digitValidator.validate("?")).contains(digitError);
   }
 
   @Test public void
@@ -61,10 +65,10 @@ public class ValidatorTest  {
   @Test public void 
   specialCharacterValidatorAddsErrorWhenThereIsNoSpecialCharacter() throws Exception {  
     Validator validator = new Validator.SpecialCharValidator();
-    String specialCharacterError = "Password needs to contain atleast one special character";
-    assertThat(validator.validate("8")).contains(specialCharacterError);
-    assertThat(validator.validate("Z")).contains(specialCharacterError);
-    assertThat(validator.validate("z")).contains(specialCharacterError);
+    String specialCharError = "Password needs to contain atleast one special character";
+    assertThat(validator.validate("8")).contains(specialCharError);
+    assertThat(validator.validate("Z")).contains(specialCharError);
+    assertThat(validator.validate("z")).contains(specialCharError);
   }
   
 
