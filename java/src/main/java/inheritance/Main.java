@@ -1,9 +1,5 @@
 package inheritance;
 
-import composition.BestValueMenu;
-import composition.GourmetsMenu;
-import composition.MeatLoversMenu;
-
 public class Main {
 
     public static void main(String[] args) {

@@ -3,19 +3,23 @@ package composition;
 public class Main {
 
     public static void main(String[] args) {
-        BestValueMenu bestValueMenu = new BestValueMenu();
-        printMenu(bestValueMenu);
-        BestValueMenu meatLoversMenu = new MeatLoversMenu();
+        Menu menu = new Menu(new Brownie(), new QuicheLorraine());
+        printMenu(menu);
+        Menu meatLoversMenu = new Menu(new Brownie(), new FiletMignon());
         printMenu(meatLoversMenu);
-        BestValueMenu gourmetMenu = new GourmetsMenu();
+        Menu gourmetMenu = new Menu(new CremeCaramel(), new QuicheLorraine());
         printMenu(gourmetMenu);
+
+        // new feature!!!
+        Menu noGlutenMenu = new Menu(new CremeCaramel(), new FiletMignon());
+        printMenu(noGlutenMenu);
     }
 
-    private static void printMenu(BestValueMenu bestValueMenu) {
-        System.out.println("serving menu: " + bestValueMenu.getClass().getSimpleName());
-        System.out.println(bestValueMenu.starter());
-        System.out.println(bestValueMenu.mainCourse());
-        System.out.println(bestValueMenu.dessert());
+    private static void printMenu(Menu menu) {
+        System.out.println("serving menu: " + menu.getClass().getSimpleName());
+        System.out.println(menu.starter());
+        System.out.println(menu.mainCourse());
+        System.out.println(menu.dessert());
         System.out.println();
     }
 }

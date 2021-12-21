@@ -1,6 +1,5 @@
 package inheritance;
 
-import composition.BestValueMenu;
 
 public class GourmetsMenu extends BestValueMenu {
     @Override

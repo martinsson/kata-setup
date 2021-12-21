@@ -1,6 +1,6 @@
 package composition;
 
-public class GourmetsMenu extends BestValueMenu {
+public class CremeCaramel implements Dessert {
     @Override
     public String dessert() {
         return "crème caramel";
