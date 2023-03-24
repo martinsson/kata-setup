@@ -10,11 +10,23 @@ function formatNames(names: string[]) {
   }
 }
 
-function greet(...names: string[]) {
+function flatten(names: string[]) {
+  return names.reduce((acc, value) => {
+    let csvNames = value.replace(/"/g, "").split(", ");
+    return acc.concat(...csvNames);
+  }, []);
+}
 
+function normalizeNames(names: string[]) {
   if (names.length === 1 && !names[0]) {
     names = ["my friend"]
   }
+
+  return flatten(names)
+}
+
+function greet(...names: string[]) {
+  names = normalizeNames(names);
 
   const uppercaseNames = names.filter(n => n.toUpperCase() === n)
   const lowercaseNames = names.filter(n => n.toUpperCase() !== n)
@@ -41,6 +53,8 @@ describe('greeting', () => {
     [['mary', 'jane'], 'hello, mary and jane'],
     [['mary', 'jane', 'charlotte'], 'hello, mary, jane and charlotte'],
     [["Amy", "BRIAN", "Charlotte"], 'hello, Amy and Charlotte. AND HELLO BRIAN!'],
+    [["Amy", "BRIAN, Charlotte"], 'hello, Amy and Charlotte. AND HELLO BRIAN!'],
+    [["Amy", "\"BRIAN, Charlotte\""], 'hello, Amy and Charlotte. AND HELLO BRIAN!'],
   ].forEach(([names, expected]) => {
     it('should ', () => {
       expect(greet(...names)).equal(expected);
