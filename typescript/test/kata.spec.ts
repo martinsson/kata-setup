@@ -1,35 +1,11 @@
 // tslint:disable-next-line:no-implicit-dependencies
 import {assert, expect} from 'chai';
 
-function formatNames(names: string[]) {
-  if (names.length > 1) {
-    let last = names.splice(names.length -1, 1);
-    return names.join(', ') + " and " + last
-  } else {
-    return names[0]
-  }
-}
-
-function flatten(names: string[]) {
-  return names.reduce((acc, value) => {
-    let csvNames = value.replace(/"/g, "").split(", ");
-    return acc.concat(...csvNames);
-  }, []);
-}
-
-function normalizeNames(names: string[]) {
-  if (names.length === 1 && !names[0]) {
-    names = ["my friend"]
-  }
-
-  return flatten(names)
-}
-
 function greet(...names: string[]) {
   names = normalizeNames(names);
 
-  const uppercaseNames = names.filter(n => n.toUpperCase() === n)
-  const lowercaseNames = names.filter(n => n.toUpperCase() !== n)
+  const uppercaseNames = names.filter((n) => n.toUpperCase() === n)
+  const lowercaseNames = names.filter((n) => n.toUpperCase() !== n)
   if (uppercaseNames.length > 0 && lowercaseNames.length > 0) {
     return `hello, ${formatNames(lowercaseNames)}` + ". AND " + `HELLO ${formatNames(uppercaseNames)}!`;
   }
@@ -39,11 +15,36 @@ function greet(...names: string[]) {
   return `hello, ${formatNames(lowercaseNames)}`;
 }
 
+function normalizeNames(names: string[]) {
+  if (names.length === 1 && !names[0]) {
+    names = ["my friend"]
+  }
+
+  const allNames = names
+    .map((name) => name.replace(/"/g, ""))
+    .map((value) => value.split(", "));
+  return flatten(allNames)
+}
+
+function flatten(names: string[][]) {
+  return names.reduce((acc, value) => acc.concat(...value), []);
+}
+
+function formatNames(names: string[]) {
+  if (names.length > 1) {
+    const last = names.splice(names.length - 1, 1);
+    return names.join(', ') + " and " + last
+  } else {
+    return names[0]
+  }
+}
+
+
 describe('greeting', () => {
   [
     ['joe', 'hello, joe'],
     [undefined, 'hello, my friend'],
-    ['JERRY', 'HELLO JERRY!']
+    ['JERRY', 'HELLO JERRY!'],
   ].forEach(([name, expected]) => {
     it('should ', () => {
       expect(greet(name)).equal(expected);
@@ -68,6 +69,5 @@ describe('greeting', () => {
     expect(greet('mary', 'jane')).equal('hello, mary and jane')
     expect(greet('mary', 'jane', 'charlotte')).equal('hello, mary, jane and charlotte')
   });
-
 
 });
