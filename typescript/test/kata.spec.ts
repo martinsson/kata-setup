@@ -4,15 +4,15 @@ import {assert, expect} from 'chai';
 function greet(...names: string[]) {
   names = normalizeNames(names);
 
-  const uppercaseNames = names.filter((n) => n.toUpperCase() === n)
-  const lowercaseNames = names.filter((n) => n.toUpperCase() !== n)
-  if (uppercaseNames.length > 0 && lowercaseNames.length > 0) {
-    return `hello, ${formatNames(lowercaseNames)}` + ". AND " + `HELLO ${formatNames(uppercaseNames)}!`;
+  const shoutingNames = formatNames(names.filter((n) => n.toUpperCase() === n))
+  const normalNames = formatNames(names.filter((n) => n.toUpperCase() !== n))
+  if (normalNames && shoutingNames) {
+    return `hello, ${normalNames}` + ". AND " + `HELLO ${shoutingNames}!`;
   }
-  if (uppercaseNames.length > 0) {
-    return `HELLO ${formatNames(uppercaseNames)}!`
+  if (normalNames) {
+    return `hello, ${normalNames}`;
   }
-  return `hello, ${formatNames(lowercaseNames)}`;
+  return `HELLO ${shoutingNames}!`
 }
 
 function normalizeNames(names: string[]) {
@@ -23,6 +23,7 @@ function normalizeNames(names: string[]) {
   const allNames = names
     .map((name) => name.replace(/"/g, ""))
     .map((value) => value.split(", "));
+
   return flatten(allNames)
 }
 
@@ -31,11 +32,11 @@ function flatten(names: string[][]) {
 }
 
 function formatNames(names: string[]) {
-  if (names.length > 1) {
+  if (names.length <= 1) {
+    return names[0]
+  } else {
     const last = names.splice(names.length - 1, 1);
     return names.join(', ') + " and " + last
-  } else {
-    return names[0]
   }
 }
 
