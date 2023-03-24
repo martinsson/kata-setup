@@ -1,22 +1,32 @@
 // tslint:disable-next-line:no-implicit-dependencies
 import {assert, expect} from 'chai';
 
+function formatNames(names: string[]) {
+  let guests: string;
+  if (names.length === 3) {
+    return names[0] + ", " + names[1] + " and " + names[2];
+  } else if (names.length === 2) {
+    return names[0] + " and " + names[1]
+  } else {
+    return names[0]
+  }
+}
+
 function greet(...names: string[]) {
 
-  const name = names[0]
-  if (names.length === 3) {
-    const guests = names[0] + ", " + names[1] + " and " + names[2]
-    return `hello, ${guests}`
+  if (names.length === 1 && !names[0]) {
+    names = ["my friend"]
   }
-  if (names.length === 2) {
-    const guests = names[0] + " and " + names[1]
-    return `hello, ${guests}`
+
+  const uppercaseNames = names.filter(n => n.toUpperCase() === n)
+  const lowercaseNames = names.filter(n => n.toUpperCase() !== n)
+  if (uppercaseNames.length > 0 && lowercaseNames.length > 0) {
+    return `hello, ${formatNames(lowercaseNames)}` + ". AND " + `HELLO ${formatNames(uppercaseNames)}!`;
   }
-  const s = name || "my friend";
-  if (s.toUpperCase() === s) {
-    return `HELLO ${s}!`
+  if (uppercaseNames.length > 0) {
+    return `HELLO ${formatNames(uppercaseNames)}!`
   }
-  return `hello, ${s}`;
+  return `hello, ${formatNames(lowercaseNames)}`;
 }
 
 describe('greeting', () => {
@@ -32,6 +42,7 @@ describe('greeting', () => {
   [
     [['mary', 'jane'], 'hello, mary and jane'],
     [['mary', 'jane', 'charlotte'], 'hello, mary, jane and charlotte'],
+    [["Amy", "BRIAN", "Charlotte"], 'hello, Amy and Charlotte. AND HELLO BRIAN!'],
   ].forEach(([names, expected]) => {
     it('should ', () => {
       expect(greet(...names)).equal(expected);
