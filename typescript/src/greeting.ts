@@ -1,15 +1,24 @@
+function sayHelloTo(normalNames: string) {
+  return `hello, ${normalNames}.`;
+}
+
+function shouldHelloTo(shoutingNames: string) {
+  return `HELLO ${shoutingNames} !`;
+}
+
 export function greet(...names: string[]) {
   names = normalizeNames(names);
 
   const shoutingNames = formatNames(names.filter((n) => n.toUpperCase() === n))
   const normalNames = formatNames(names.filter((n) => n.toUpperCase() !== n))
+
   if (normalNames && shoutingNames) {
-    return `hello, ${normalNames}` + ". AND " + `HELLO ${shoutingNames} !`;
+    return sayHelloTo(normalNames) + " AND " + shouldHelloTo(shoutingNames);
   }
   if (normalNames) {
-    return `hello, ${normalNames}.`;
+    return sayHelloTo(normalNames);
   }
-  return `HELLO ${shoutingNames} !`
+  return shouldHelloTo(shoutingNames)
 }
 
 function normalizeNames(names: string[]) {
