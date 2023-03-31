@@ -31,8 +31,7 @@ function flatten(names: string[][]) {
 function formatNames(names: string[]) {
   if (names.length <= 1) {
     return names[0]
-  } else {
-    const last = names.splice(names.length - 1, 1);
-    return names.join(', ') + " and " + last
   }
+  const last = names.splice(names.length - 1, 1);
+  return names.join(', ') + " and " + last
 }
