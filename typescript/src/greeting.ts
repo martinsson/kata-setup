@@ -32,6 +32,8 @@ function formatNames(names: string[]) {
   if (names.length <= 1) {
     return names[0]
   }
-  const last = names.splice(names.length - 1, 1);
-  return names.join(', ') + " and " + last
+  const lastIndex = names.length - 1;
+  const allButLast = names.slice(0, lastIndex);
+  const last = names[lastIndex]
+  return allButLast.join(', ') + " and " + last
 }
