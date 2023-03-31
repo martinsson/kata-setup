@@ -1,24 +1,14 @@
-function sayHelloTo(normalNames: string) {
-  return `hello, ${normalNames}.`;
-}
-
-function shouldHelloTo(shoutingNames: string) {
-  return `HELLO ${shoutingNames} !`;
-}
 
 export function greet(...names: string[]) {
-  names = normalizeNames(names);
+  const normalizedNames = normalizeNames(names);
 
-  const shoutingNames = formatNames(names.filter((n) => n.toUpperCase() === n))
-  const normalNames = formatNames(names.filter((n) => n.toUpperCase() !== n))
+  const normalNames = joinNames(normalizedNames.filter((n) => n.toUpperCase() !== n))
+  const shoutingNames = joinNames(normalizedNames.filter((n) => n.toUpperCase() === n))
 
   if (normalNames && shoutingNames) {
-    return sayHelloTo(normalNames) + " AND " + shouldHelloTo(shoutingNames);
+    return sayHelloTo(normalNames) + " AND " + shoutHelloTo(shoutingNames);
   }
-  if (normalNames) {
-    return sayHelloTo(normalNames);
-  }
-  return shouldHelloTo(shoutingNames)
+  return normalNames ? sayHelloTo(normalNames) : shoutHelloTo(shoutingNames);
 }
 
 function normalizeNames(names: string[]) {
@@ -26,9 +16,11 @@ function normalizeNames(names: string[]) {
     names = ["my friend"]
   }
 
+  const csvEscapeCharacters = /"/g;
+  const csvSeparator = ", ";
   const allNames = names
-    .map((name) => name.replace(/"/g, ""))
-    .map((value) => value.split(", "));
+    .map((name) => name.replace(csvEscapeCharacters, ""))
+    .map((value) => value.split(csvSeparator));
 
   return flatten(allNames)
 }
@@ -37,7 +29,7 @@ function flatten(names: string[][]) {
   return names.reduce((acc, value) => acc.concat(...value), []);
 }
 
-function formatNames(names: string[]) {
+function joinNames(names: string[]) {
   if (names.length <= 1) {
     return names[0]
   }
@@ -45,4 +37,12 @@ function formatNames(names: string[]) {
   const allButLast = names.slice(0, lastIndex);
   const last = names[lastIndex]
   return allButLast.join(', ') + " and " + last
+}
+
+function sayHelloTo(normalNames: string) {
+  return `hello, ${normalNames}.`;
+}
+
+function shoutHelloTo(shoutingNames: string) {
+  return `HELLO ${shoutingNames} !`;
 }

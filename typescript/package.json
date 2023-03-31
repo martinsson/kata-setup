@@ -23,7 +23,7 @@
     "watch:test": "npm run test -- --watch-extensions ts  --watch"
   },
   "dependencies": {
-    "lodash": "^4.17.5"
+    "lodash": "^4.17.21"
   },
   "devDependencies": {
     "@types/chai": "^4.2.14",
