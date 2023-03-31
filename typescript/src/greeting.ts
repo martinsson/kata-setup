@@ -11,14 +11,15 @@ export function greet(...names: string[]) {
   return normalNames ? sayHelloTo(normalNames) : shoutHelloTo(shoutingNames);
 }
 
-function normalizeNames(names: string[]) {
-  if (names.length === 1 && !names[0]) {
-    names = ["my friend"]
+function normalizeNames(rawNames: string[]) {
+  const inputIsEmpty = rawNames.length === 0 || !rawNames[0];
+  if (inputIsEmpty) {
+    rawNames = ["my friend"]
   }
 
   const csvEscapeCharacters = /"/g;
   const csvSeparator = ", ";
-  const allNames = names
+  const allNames = rawNames
     .map((name) => name.replace(csvEscapeCharacters, ""))
     .map((value) => value.split(csvSeparator));
 

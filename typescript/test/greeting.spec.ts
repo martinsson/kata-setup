@@ -24,6 +24,10 @@ describe('greeting', () => {
     });
   })
 
+  it('should work for no names', () => {
+    expect(greet()).equal("hello, my friend.")
+  });
+
   it('greet', () => {
     expect(greet("joe")).equal('hello, joe.');
     expect(greet(undefined)).equal('hello, my friend.');
