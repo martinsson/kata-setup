@@ -4,12 +4,12 @@ export function greet(...names: string[]) {
   const shoutingNames = formatNames(names.filter((n) => n.toUpperCase() === n))
   const normalNames = formatNames(names.filter((n) => n.toUpperCase() !== n))
   if (normalNames && shoutingNames) {
-    return `hello, ${normalNames}` + ". AND " + `HELLO ${shoutingNames}!`;
+    return `hello, ${normalNames}` + ". AND " + `HELLO ${shoutingNames} !`;
   }
   if (normalNames) {
-    return `hello, ${normalNames}`;
+    return `hello, ${normalNames}.`;
   }
-  return `HELLO ${shoutingNames}!`
+  return `HELLO ${shoutingNames} !`
 }
 
 function normalizeNames(names: string[]) {
