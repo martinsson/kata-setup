@@ -37,12 +37,10 @@ public class FizzBuzzNoIfTest {
                 new Case(3, "fizz"),
                 new Case(5, "buzz"));
         return cases.stream()
-                .filter(Case.doesApply(input))
-                .map(Case::getResult).findFirst()
+                .filter(Case.appliesTo(input))
+                .map(Case::getResult)
+                .findFirst()
                 .orElse(input + "");
-//        var possibleResults = Arrays.asList(String.valueOf(input), "fizz", "buzz", "fizzbuzz");
-//        int key = getResultPosition(input);
-//        return possibleResults.get(key);
     }
 
     private int getResultPosition(int input) {

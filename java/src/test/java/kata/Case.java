@@ -1,6 +1,5 @@
 package kata;
 
-import java.util.function.Function;
 import java.util.function.Predicate;
 
 class Case {
@@ -14,7 +13,7 @@ class Case {
         this.result = result;
     }
 
-    public static Predicate<Case> doesApply(int input) {
+    public static Predicate<Case> appliesTo(int input) {
         return c -> input % c.number == 0;
     }
 
