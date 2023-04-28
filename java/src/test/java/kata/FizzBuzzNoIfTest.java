@@ -36,7 +36,7 @@ public class FizzBuzzNoIfTest {
 
     private String fizzbuzz(int input) {
         List<Case> cases = Arrays.asList(new Case(3, "fizz"), new Case(3, "buzz"));
-        cases.stream().filter(c -> input % c.number == 0 );
+        cases.stream().filter(c -> input % c.number == 0 ).map(c -> c.result);
         var possibleResults = Arrays.asList(String.valueOf(input), "fizz", "buzz", "fizzbuzz");
         int key = getResultPosition(input);
         return possibleResults.get(key);
