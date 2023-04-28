@@ -34,9 +34,21 @@ public class FizzBuzzNoIfTest {
     }
 
     private String fizzbuzz(int input) {
+        Arrays.asList(new Case(3, "fizz"));
         var possibleResults = Arrays.asList(String.valueOf(input), "fizz", "buzz", "fizzbuzz");
         int key = getResultPosition(input);
         return possibleResults.get(key);
+    }
+    static class Case {
+
+        private final int number;
+        private final String result;
+
+        public Case(int number, String result) {
+
+            this.number = number;
+            this.result = result;
+        }
     }
 
     private int getResultPosition(int input) {
