@@ -6,6 +6,7 @@ import org.junit.jupiter.params.provider.ValueSource;
 
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.function.Function;
 
@@ -34,15 +35,16 @@ public class FizzBuzzNoIfTest {
     }
 
     private String fizzbuzz(int input) {
-        Arrays.asList(new Case(3, "fizz"));
+        List<Case> cases = Arrays.asList(new Case(3, "fizz"), new Case(3, "buzz"));
+        cases.stream().filter(c -> input % c.number == 0 );
         var possibleResults = Arrays.asList(String.valueOf(input), "fizz", "buzz", "fizzbuzz");
         int key = getResultPosition(input);
         return possibleResults.get(key);
     }
     static class Case {
 
-        private final int number;
-        private final String result;
+        public final int number;
+        public final String result;
 
         public Case(int number, String result) {
 
