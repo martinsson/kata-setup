@@ -5,10 +5,9 @@ import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
 import java.util.Arrays;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.function.Function;
+import java.util.function.Predicate;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -35,12 +34,19 @@ public class FizzBuzzNoIfTest {
     }
 
     private String fizzbuzz(int input) {
-        List<Case> cases = Arrays.asList(new Case(15, "fizzbuzz"), new Case(3, "fizz"), new Case(5, "buzz"));
-        return cases.stream().filter(c -> input % c.number == 0 ).map(c -> c.result).findFirst().orElse(input + "");
+        List<Case> cases = Arrays.asList(
+                new Case(15, "fizzbuzz"),
+                new Case(3, "fizz"),
+                new Case(5, "buzz"));
+        return cases.stream()
+                .filter(Case.doesApply(input))
+                .map(Case.getResult()).findFirst()
+                .orElse(input + "");
 //        var possibleResults = Arrays.asList(String.valueOf(input), "fizz", "buzz", "fizzbuzz");
 //        int key = getResultPosition(input);
 //        return possibleResults.get(key);
     }
+
     static class Case {
 
         public final int number;
@@ -50,6 +56,14 @@ public class FizzBuzzNoIfTest {
 
             this.number = number;
             this.result = result;
+        }
+
+        public static Predicate<Case> doesApply(int input) {
+            return c -> input % c.number == 0;
+        }
+
+        public static Function<Case, String> getResult() {
+            return c -> c.result;
         }
     }
 
