@@ -10,7 +10,3 @@ authors = [
     {name = "Your Name"}
 ]
 
-[tool.pytest.ini_options]
-pythonpath = [
-    "."
-] 
