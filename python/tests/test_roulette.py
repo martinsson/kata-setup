@@ -1,7 +1,7 @@
 import pytest
 from src.kata.roulette import Roulette
 from src.kata.result import Result, Color
-from tests.test_helpers import TestRandomizer, TestBallSpinAdapter
+from tests.helpers import TestRandomizer, TestBallSpinAdapter
 
 class TestRoulette:
     @pytest.fixture
