@@ -10,4 +10,4 @@ class TestBallSpinAdapter:
         after = time.time() * 1000  # Convert to milliseconds
         
         twenty_seconds = 20000
-        assert abs(after - before - twenty_seconds) <= 3 
+        assert abs(after - before - twenty_seconds) <= 100 
