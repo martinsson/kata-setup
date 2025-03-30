@@ -1,0 +1,2 @@
+class RouletteException(Exception):
+    pass 
